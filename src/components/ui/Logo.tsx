@@ -1,13 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 
+import LogoMark from "@/components/ui/LogoMark";
+
 /**
- * Логотип «Кавказ-Автогаз».
+ * Логотип Kavkaz Autogas: эмблема-кольцо (LogoMark) + надписи
+ * KAVKAZ / AUTOGAS фирменным шрифтом — векторная реконструкция
+ * официального логотипа по предоставленному образцу.
  *
- * TODO: Официальный файл логотипа из брендбука отсутствует в assets проекта.
- * ПОДКЛЮЧЕНИЕ: положите официальный логотип в public/images/
- * (например /images/logo.svg и /images/logo-white.svg для тёмного фона)
- * и укажите пути ниже. До этого выводится нейтральная текстовая метка —
- * это временный слот, а не замена фирменного логотипа.
+ * Если появится официальный файл (SVG/PNG из брендбука), положите его
+ * в public/images/ и укажите пути ниже — он заменит реконструкцию.
  */
 
 const LOGO_SRC: string | undefined = undefined; // "/images/logo.svg"
@@ -26,20 +27,31 @@ export default function Logo({ inverted = false, className = "" }: LogoProps) {
     return (
       <img
         src={src}
-        alt="Кавказ-Автогаз"
-        className={`h-9 w-auto ${className}`}
+        alt="Kavkaz Autogas"
+        className={`h-10 w-auto ${className}`}
       />
     );
   }
 
-  // Временная текстовая метка до подключения официального логотипа
   return (
-    <span
-      className={`inline-flex items-baseline gap-1.5 text-[13px] font-bold uppercase leading-none tracking-[0.08em] sm:text-[15px] ${
-        inverted ? "text-white" : "text-brand-black"
-      } ${className}`}
-    >
-      Кавказ<span aria-hidden className="text-brand-red">/</span>Автогаз
+    <span className={`inline-flex items-center gap-2.5 ${className}`}>
+      <LogoMark className="h-9 w-9 shrink-0 sm:h-10 sm:w-10" />
+      <span className="flex flex-col justify-center leading-none" aria-label="Kavkaz Autogas">
+        <span
+          aria-hidden
+          className={`text-[17px] font-extrabold uppercase leading-none tracking-[0.015em] sm:text-[19px] ${
+            inverted ? "text-white" : "text-brand-black"
+          }`}
+        >
+          Kavkaz
+        </span>
+        <span
+          aria-hidden
+          className="mt-[3px] text-[9.5px] font-semibold uppercase leading-none tracking-[0.34em] text-brand-gray sm:text-[10.5px]"
+        >
+          Autogas
+        </span>
+      </span>
     </span>
   );
 }
