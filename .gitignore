@@ -27,3 +27,4 @@ next-env.d.ts
 
 # сгенерированное превью для Artifact (не часть исходников)
 preview-fragment.html
+preview-wrapped-test.html
