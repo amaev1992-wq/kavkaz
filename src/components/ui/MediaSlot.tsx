@@ -13,12 +13,15 @@ interface MediaSlotProps {
   className?: string;
   /** Приглушить подпись placeholder (для фоновых слотов под overlay). */
   quiet?: boolean;
+  /** Загружать сразу (для hero-изображения над сгибом). */
+  priority?: boolean;
 }
 
 export default function MediaSlot({
   data,
   className = "",
   quiet = false,
+  priority = false,
 }: MediaSlotProps) {
   if (data.src) {
     return (
@@ -27,7 +30,8 @@ export default function MediaSlot({
         alt={data.alt}
         className={`h-full w-full object-cover ${className}`}
         style={{ objectPosition: data.focal ?? "center" }}
-        loading="lazy"
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
       />
     );
   }

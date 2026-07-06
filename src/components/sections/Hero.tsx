@@ -46,18 +46,20 @@ export default function Hero() {
         animate={{ scale: 1 }}
         transition={{ duration: 2.4, ease: [0.22, 1, 0.36, 1] }}
       >
-        <MediaSlot data={images.hero} quiet />
+        <MediaSlot data={images.hero} quiet priority />
       </motion.div>
 
-      {/* Overlay для читаемости текста */}
+      {/* Overlay для читаемости текста: вертикальный + левый градиенты */}
       <div
         aria-hidden
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, rgba(30,30,30,0.35) 0%, rgba(30,30,30,0.15) 40%, rgba(20,20,20,0.82) 100%)",
+            "linear-gradient(90deg, rgba(18,18,18,0.62) 0%, rgba(18,18,18,0.3) 45%, rgba(18,18,18,0.05) 72%), linear-gradient(180deg, rgba(30,30,30,0.4) 0%, rgba(30,30,30,0.18) 40%, rgba(16,16,16,0.86) 100%)",
         }}
       />
+      {/* Дополнительная вуаль на мобильных: кадр там крупнее и ярче */}
+      <div aria-hidden className="absolute inset-0 bg-[#141414]/45 sm:hidden" />
 
       <div className="container-page relative pb-16 pt-36 sm:pb-20 lg:pb-24">
         <motion.p

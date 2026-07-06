@@ -17,7 +17,7 @@ export default function AssetSection() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, rgba(20,20,20,0.55) 0%, rgba(20,20,20,0.35) 45%, rgba(20,20,20,0.8) 100%)",
+              "linear-gradient(90deg, rgba(16,16,16,0.72) 0%, rgba(16,16,16,0.42) 48%, rgba(16,16,16,0.12) 75%), linear-gradient(180deg, rgba(20,20,20,0.5) 0%, rgba(20,20,20,0.3) 45%, rgba(20,20,20,0.82) 100%)",
           }}
         />
       </div>
@@ -26,8 +26,8 @@ export default function AssetSection() {
         <Reveal>
           <p className="kicker text-white/60">08 — Актив</p>
           <h2 className="mt-6 max-w-[18ch] text-[clamp(1.65rem,4.6vw,3.8rem)] font-bold leading-[1.08] tracking-[-0.01em]">
-            Не тренд. Не виртуальный продукт.{" "}
-            <span className="text-brand-red">Реальный инфраструктурный актив.</span>
+            <span className="text-white/60">Не тренд. Не виртуальный продукт.</span>{" "}
+            Реальный инфраструктурный актив.
           </h2>
         </Reveal>
         <Reveal delay={0.15}>

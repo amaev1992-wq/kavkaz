@@ -26,12 +26,11 @@ export const images: Record<
   "hero" | "infrastructure" | "asset" | "premiumFormat",
   MediaSlotData
 > = {
-  // TODO: Hero image — real Kavkaz Autogas station at dusk
-  // (современная станция, вечер, контрастное архитектурное освещение)
   hero: {
-    alt: "АГЗС «Кавказ-Автогаз» вечером",
+    src: "/images/hero-station-night.jpg",
+    alt: "Станция сети «Кавказ-Автогаз» ночью: подсвеченный навес с фирменным логотипом и минимаркет",
     placeholderLabel: "Фото: станция «Кавказ-Автогаз», вечер",
-    focal: "center",
+    focal: "50% 42%",
   },
 
   // TODO: Logistics section — Kavkaz Autogas gas tanker fleet
@@ -42,12 +41,11 @@ export const images: Record<
     focal: "center",
   },
 
-  // TODO: Asset section — full-width photo of an operating station
-  // (крупный план действующей станции, дневной или вечерний кадр)
   asset: {
-    alt: "Действующая АГЗС сети «Кавказ-Автогаз»",
+    src: "/images/hero-station-night.jpg",
+    alt: "Действующая станция сети «Кавказ-Автогаз» ночью",
     placeholderLabel: "Фото: действующая станция сети, full-width",
-    focal: "center",
+    focal: "50% 55%",
   },
 
   // TODO: Premium format — station with shop and cafe
