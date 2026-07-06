@@ -1,0 +1,6 @@
+<!-- TODO: заменить на официальный фавикон из брендбука (знак логотипа).
+     Сейчас — нейтральный placeholder в фирменном красном. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <rect width="32" height="32" fill="#C50C22"/>
+  <rect x="6" y="15" width="20" height="2" fill="#FFFFFF"/>
+</svg>

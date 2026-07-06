@@ -1,0 +1,72 @@
+@import "./fonts.css";
+@import "tailwindcss";
+
+@theme {
+  /* Фирменные цвета — брендбук Kavkaz Autogas */
+  --color-brand-red: #c50c22;
+  --color-brand-black: #1e1e1e;
+  --color-brand-gray: #7f7f7f;
+
+  /* Служебные тона */
+  --color-paper: #fafaf7;
+  --color-line: #e7e4de;
+  --color-line-dark: #3b3b3b;
+
+  /* Proxima Nova подключается первой в стеке — см. fonts.css */
+  --font-sans: "Proxima Nova", "Montserrat", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  --tracking-kicker: 0.18em;
+}
+
+html {
+  scroll-padding-top: 96px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-brand-black);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background-color: var(--color-brand-red);
+  color: #fff;
+}
+
+/* Видимый focus для клавиатурной навигации */
+:focus-visible {
+  outline: 2px solid var(--color-brand-red);
+  outline-offset: 3px;
+}
+
+@layer components {
+  /* Надзаголовок секции: «01 — О компании» */
+  .kicker {
+    @apply flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.18em];
+  }
+
+  .kicker::before {
+    content: "";
+    @apply block h-px w-8 bg-brand-red;
+  }
+
+  /* Контейнер страницы */
+  .container-page {
+    @apply mx-auto w-full max-w-[1360px] px-4 min-[400px]:px-5 sm:px-8 lg:px-12;
+  }
+
+  /* Крупные числа: табличные цифры, чтобы count-up не «дёргался» */
+  .num {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+}
