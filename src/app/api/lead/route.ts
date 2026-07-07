@@ -50,7 +50,7 @@ function leadToText(lead: LeadPayload): string {
  * Диагностика: GET /api/lead показывает, какой способ доставки настроен
  * (сами ключи и пароли не раскрываются).
  */
-export async function GET() {
+export async function GET(request: Request) {
   const provider = process.env.WEB3FORMS_ACCESS_KEY
     ? "web3forms"
     : process.env.SMTP_HOST &&
@@ -59,6 +59,30 @@ export async function GET() {
         process.env.LEAD_EMAIL_TO
       ? "smtp"
       : "none";
+
+  // Тестовый режим: /api/lead?test=1 — реально отправляет пробную заявку
+  // и показывает сырой ответ провайдера (для диагностики доставки).
+  const url = new URL(request.url);
+  if (url.searchParams.get("test") && provider === "web3forms") {
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: process.env.WEB3FORMS_ACCESS_KEY,
+          subject: "Тест доставки заявок — сайт франшизы",
+          from_name: "Сайт франшизы Кавказ-Автогаз",
+          name: "Тестовая заявка",
+          message: "Проверка доставки заявок с сайта. Если вы видите это письмо — всё работает.",
+        }),
+      });
+      const body = await response.json().catch(() => null);
+      return NextResponse.json({ provider, testStatus: response.status, testResponse: body });
+    } catch (error) {
+      return NextResponse.json({ provider, testError: String(error) });
+    }
+  }
+
   return NextResponse.json({
     provider,
     hint:
