@@ -16,9 +16,8 @@ export const siteConfig = {
 
   /**
    * Материалы, которые получает посетитель после отправки заявки.
-   * Файлы лежат в public/docs/. Пустая строка — кнопка скачивания скрыта.
-   * TODO: presentation — загрузите сжатую презентацию в public/docs/
-   * и укажите путь, например "/docs/kavkaz-autogas-presentation.pdf".
+   * Файлы лежат в public/docs/. Пустая строка в href — кнопка скрыта,
+   * а тексты на сайте автоматически перестают обещать этот материал.
    */
   documents: {
     concept: {
@@ -27,7 +26,7 @@ export const siteConfig = {
       label: "Скачать концепцию",
     },
     presentation: {
-      href: "",
+      href: "/docs/kavkaz-autogas-presentation.pdf",
       downloadName: "Презентация франшизы Кавказ-Автогаз.pdf",
       label: "Скачать презентацию",
     },
