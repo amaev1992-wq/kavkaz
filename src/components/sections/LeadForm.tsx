@@ -5,6 +5,7 @@ import type { ChangeEvent, FocusEvent, FormEvent } from "react";
 import Reveal from "@/components/ui/Reveal";
 import { onLeadFormatPreset } from "@/lib/leadPreset";
 import { trackEvent } from "@/lib/analytics";
+import { siteConfig } from "@/config/site";
 import {
   submitLead,
   type InterestedFormat,
@@ -14,6 +15,7 @@ import {
 interface FormValues {
   name: string;
   phone: string;
+  email: string;
   city: string;
   landStatus: LandStatus | "";
   format: InterestedFormat | "";
@@ -25,6 +27,7 @@ type FormErrors = Partial<Record<keyof FormValues, string>>;
 const initialValues: FormValues = {
   name: "",
   phone: "",
+  email: "",
   city: "",
   landStatus: "",
   format: "",
@@ -53,6 +56,10 @@ function isValidRuPhone(value: string): boolean {
   return digits.length === 11 && digits.startsWith("7");
 }
 
+function isValidEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim());
+}
+
 function validate(values: FormValues): FormErrors {
   const errors: FormErrors = {};
   if (values.name.trim().length < 2) {
@@ -60,6 +67,9 @@ function validate(values: FormValues): FormErrors {
   }
   if (!isValidRuPhone(values.phone)) {
     errors.phone = "Укажите телефон в формате +7 (XXX) XXX-XX-XX";
+  }
+  if (!isValidEmail(values.email)) {
+    errors.email = "Укажите корректный email — на него придут материалы";
   }
   if (values.city.trim().length < 2) {
     errors.city = "Укажите город или регион";
@@ -143,6 +153,7 @@ export default function LeadForm() {
     const result = await submitLead({
       name: values.name.trim(),
       phone: values.phone,
+      email: values.email.trim(),
       city: values.city.trim(),
       landStatus: values.landStatus as LandStatus,
       format: values.format as InterestedFormat,
@@ -195,8 +206,48 @@ export default function LeadForm() {
                       Спасибо. Заявка получена.
                     </h3>
                     <p className="mt-4 max-w-md text-[16px] leading-relaxed text-brand-black/70">
-                      Мы свяжемся с вами для обсуждения проекта.
+                      Мы свяжемся с вами для обсуждения проекта. А материалы
+                      о франшизе можно изучить уже сейчас:
                     </p>
+                    <div className="mt-7 flex flex-col gap-3 self-stretch sm:flex-row">
+                      {(
+                        [
+                          siteConfig.documents.presentation,
+                          siteConfig.documents.concept,
+                        ] as const
+                      )
+                        .filter((doc) => doc.href)
+                        .map((doc) => (
+                          <a
+                            key={doc.href}
+                            href={doc.href}
+                            download={doc.downloadName}
+                            data-analytics-event="materials_download"
+                            onClick={() =>
+                              trackEvent("materials_download", { file: doc.href })
+                            }
+                            className="inline-flex min-h-[52px] items-center justify-center gap-2.5 border border-brand-black/25 px-6 text-[15px] font-semibold text-brand-black transition-colors hover:border-brand-black hover:bg-brand-black hover:text-white"
+                          >
+                            <svg
+                              aria-hidden
+                              width="15"
+                              height="16"
+                              viewBox="0 0 15 16"
+                              fill="none"
+                              className="shrink-0"
+                            >
+                              <path
+                                d="M7.5 1v10m0 0L3.5 7m4 4 4-4M1.5 14.5h12"
+                                stroke="currentColor"
+                                strokeWidth="1.6"
+                              />
+                            </svg>
+                            {doc.label}
+                          </a>
+                        ))}
+                    </div>
+                    {/* TODO: после подключения CRM/почтовой рассылки добавить
+                        строку «Эти же материалы придут на указанный email» */}
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} noValidate>
@@ -252,28 +303,55 @@ export default function LeadForm() {
                       </div>
                     </div>
 
-                    <div className="mt-6">
-                      <label htmlFor="lead-city" className={labelClass}>
-                        Город / регион
-                      </label>
-                      <input
-                        id="lead-city"
-                        name="city"
-                        type="text"
-                        autoComplete="address-level2"
-                        placeholder="Где планируете открыть станцию"
-                        value={values.city}
-                        onChange={(e) => setField("city", e.target.value)}
-                        onFocus={markStarted}
-                        aria-invalid={Boolean(errors.city)}
-                        aria-describedby={errors.city ? "lead-city-error" : undefined}
-                        className={inputClass(Boolean(errors.city))}
-                      />
-                      {errors.city && (
-                        <p id="lead-city-error" className="mt-1.5 text-[13px] text-brand-red">
-                          {errors.city}
-                        </p>
-                      )}
+                    <div className="mt-6 grid gap-6 sm:grid-cols-2">
+                      <div>
+                        <label htmlFor="lead-email" className={labelClass}>
+                          Email
+                        </label>
+                        <input
+                          id="lead-email"
+                          name="email"
+                          type="email"
+                          inputMode="email"
+                          autoComplete="email"
+                          placeholder="Пришлём презентацию и концепцию"
+                          value={values.email}
+                          onChange={(e) => setField("email", e.target.value)}
+                          onFocus={markStarted}
+                          aria-invalid={Boolean(errors.email)}
+                          aria-describedby={errors.email ? "lead-email-error" : undefined}
+                          className={inputClass(Boolean(errors.email))}
+                        />
+                        {errors.email && (
+                          <p id="lead-email-error" className="mt-1.5 text-[13px] text-brand-red">
+                            {errors.email}
+                          </p>
+                        )}
+                      </div>
+
+                      <div>
+                        <label htmlFor="lead-city" className={labelClass}>
+                          Город / регион
+                        </label>
+                        <input
+                          id="lead-city"
+                          name="city"
+                          type="text"
+                          autoComplete="address-level2"
+                          placeholder="Где планируете открыть станцию"
+                          value={values.city}
+                          onChange={(e) => setField("city", e.target.value)}
+                          onFocus={markStarted}
+                          aria-invalid={Boolean(errors.city)}
+                          aria-describedby={errors.city ? "lead-city-error" : undefined}
+                          className={inputClass(Boolean(errors.city))}
+                        />
+                        {errors.city && (
+                          <p id="lead-city-error" className="mt-1.5 text-[13px] text-brand-red">
+                            {errors.city}
+                          </p>
+                        )}
+                      </div>
                     </div>
 
                     <div className="mt-6 grid gap-6 sm:grid-cols-2">

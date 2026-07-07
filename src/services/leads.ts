@@ -18,6 +18,8 @@ export type InterestedFormat =
 export interface LeadPayload {
   name: string;
   phone: string;
+  /** Email для отправки презентации и концепции проекта. */
+  email: string;
   city: string;
   landStatus: LandStatus;
   format: InterestedFormat;

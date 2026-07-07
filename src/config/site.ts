@@ -14,6 +14,25 @@ export const siteConfig = {
 
   companyName: "Кавказ-Автогаз",
 
+  /**
+   * Материалы, которые получает посетитель после отправки заявки.
+   * Файлы лежат в public/docs/. Пустая строка — кнопка скачивания скрыта.
+   * TODO: presentation — загрузите сжатую презентацию в public/docs/
+   * и укажите путь, например "/docs/kavkaz-autogas-presentation.pdf".
+   */
+  documents: {
+    concept: {
+      href: "/docs/kavkaz-autogas-concept.pdf",
+      downloadName: "Концепция франшизы Кавказ-Автогаз.pdf",
+      label: "Скачать концепцию",
+    },
+    presentation: {
+      href: "",
+      downloadName: "Презентация франшизы Кавказ-Автогаз.pdf",
+      label: "Скачать презентацию",
+    },
+  },
+
   seo: {
     title:
       "Франшиза АГЗС Кавказ-Автогаз — открыть собственную газовую заправку",

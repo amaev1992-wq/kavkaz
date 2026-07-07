@@ -9,9 +9,11 @@
  *  - format_standard_cta
  *  - format_premium_cta
  *  - rebranding_cta
+ *  - materials_cta
  *  - lead_form_start
  *  - lead_form_submit
  *  - lead_form_success
+ *  - materials_download
  *
  * Подключение счётчика: добавьте отправку в тело trackEvent —
  * например ym(ID, 'reachGoal', name) или gtag('event', name).
@@ -28,9 +30,11 @@ export type AnalyticsEvent =
   | "format_standard_cta"
   | "format_premium_cta"
   | "rebranding_cta"
+  | "materials_cta"
   | "lead_form_start"
   | "lead_form_submit"
-  | "lead_form_success";
+  | "lead_form_success"
+  | "materials_download";
 
 export function trackEvent(
   name: AnalyticsEvent | string,
