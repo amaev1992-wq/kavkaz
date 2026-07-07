@@ -45,7 +45,7 @@ export const franchiseFormats: FranchiseFormat[] = [
     id: "premium",
     name: "Премиум",
     tagline: "Полноценный инфраструктурный объект",
-    investment: "от 40 млн ₽",
+    investment: "от 30 млн ₽",
     investmentNote: "инвестиции",
     payback: "от 5 лет",
     paybackNote: "ориентир окупаемости",
