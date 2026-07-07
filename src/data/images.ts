@@ -1,14 +1,11 @@
 /**
  * Реестр фотографий сайта.
  *
- * Реальные фотографии «Кавказ-Автогаз» в assets проекта отсутствуют,
- * поэтому src у слотов не задан — на их месте выводятся аккуратные
- * placeholder-блоки с подписью (см. components/ui/MediaSlot.tsx).
- *
- * КАК ЗАМЕНИТЬ: положите фотографию в public/images/ и укажите src,
- * например: src: "/images/hero-station-dusk.jpg".
- * Изображения выводятся через object-fit: cover; при необходимости
- * скорректируйте focal (object-position).
+ * КАК ЗАМЕНИТЬ: положите фотографию в public/images/ и укажите src.
+ * Изображения выводятся через object-fit: cover; точка фокуса кадра
+ * задаётся полем focal (object-position).
+ * Если src не задан, на месте фото выводится оформленный placeholder
+ * (см. components/ui/MediaSlot.tsx).
  */
 
 export interface MediaSlotData {
@@ -23,7 +20,13 @@ export interface MediaSlotData {
 }
 
 export const images: Record<
-  "hero" | "infrastructure" | "asset" | "premiumFormat",
+  | "hero"
+  | "infrastructure"
+  | "asset"
+  | "formatStandard"
+  | "formatPremium"
+  | "storeInterior"
+  | "network",
   MediaSlotData
 > = {
   hero: {
@@ -33,14 +36,15 @@ export const images: Record<
     focal: "50% 42%",
   },
 
-  // TODO: Logistics section — Kavkaz Autogas gas tanker fleet
-  // (газовозы компании или газонаполнительная станция)
   infrastructure: {
+    src: "/images/logistics-tankers.jpg",
     alt: "Газовозы логистического парка «Кавказ-Автогаз»",
     placeholderLabel: "Фото: газовозы компании / ГНС",
-    focal: "center",
+    focal: "50% 45%",
   },
 
+  // Ночной кадр держит full-width; дневная станция (station-asset.jpg)
+  // пока 800px — при получении оригинала покрупнее можно заменить src.
   asset: {
     src: "/images/hero-station-night.jpg",
     alt: "Действующая станция сети «Кавказ-Автогаз» ночью",
@@ -48,11 +52,31 @@ export const images: Record<
     focal: "50% 55%",
   },
 
-  // TODO: Premium format — station with shop and cafe
-  // (станция формата «Премиум»: магазин, кафе, навесная группа)
-  premiumFormat: {
-    alt: "АГЗС формата «Премиум» с магазином и кафе",
+  formatStandard: {
+    src: "/images/format-standard.jpg",
+    alt: "АГЗС формата «Стандарт»: операторный модуль и пост реализации СУГ",
+    placeholderLabel: "Фото: модульная АГЗС формата «Стандарт»",
+    focal: "50% 55%",
+  },
+
+  formatPremium: {
+    src: "/images/format-premium.jpg",
+    alt: "Станция формата «Премиум» с кофейней и магазином",
     placeholderLabel: "Фото: станция формата «Премиум»",
-    focal: "center",
+    focal: "55% 45%",
+  },
+
+  storeInterior: {
+    src: "/images/store-interior.jpg",
+    alt: "Минимаркет на станции сети: напитки, снеки и кофейная зона",
+    placeholderLabel: "Фото: минимаркет / кофейная зона",
+    focal: "45% 50%",
+  },
+
+  network: {
+    src: "/images/station-asset.jpg",
+    alt: "АЗС сети «Кавказ-Автогаз» днём",
+    placeholderLabel: "Фото: станция сети днём",
+    focal: "50% 45%",
   },
 };

@@ -1,6 +1,8 @@
 import Reveal from "@/components/ui/Reveal";
 import FormatCta from "@/components/sections/FormatCta";
+import MediaSlot from "@/components/ui/MediaSlot";
 import { franchiseFormats, rebrandingFormat } from "@/data/formats";
+import { images } from "@/data/images";
 
 /**
  * Форматы франшизы: крупная сравнительная композиция.
@@ -31,12 +33,25 @@ export default function Formats() {
               <Reveal
                 key={format.id}
                 delay={0.08 * index}
-                className={`flex flex-col border p-8 sm:p-10 lg:p-12 ${
+                className={`flex flex-col overflow-hidden border ${
                   dark
                     ? "border-brand-black bg-brand-black text-white"
                     : "border-line bg-white text-brand-black"
                 }`}
               >
+                {/* Фото формата */}
+                {format.id === "standard" ? (
+                  <div className="h-52 sm:h-60 lg:h-64">
+                    <MediaSlot data={images.formatStandard} quiet />
+                  </div>
+                ) : (
+                  <div className="grid h-52 grid-cols-[3fr_2fr] gap-px bg-brand-black sm:h-60 lg:h-64">
+                    <MediaSlot data={images.formatPremium} quiet />
+                    <MediaSlot data={images.storeInterior} quiet />
+                  </div>
+                )}
+
+                <div className="flex flex-1 flex-col p-8 sm:p-10 lg:p-12">
                 <div className="flex items-baseline justify-between gap-4">
                   <h3 className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-bold uppercase tracking-[0.02em]">
                     {format.name}
@@ -105,6 +120,7 @@ export default function Formats() {
                   >
                     {format.cta}
                   </FormatCta>
+                </div>
                 </div>
               </Reveal>
             );

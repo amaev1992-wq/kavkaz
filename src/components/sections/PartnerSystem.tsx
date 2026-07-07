@@ -1,6 +1,8 @@
 import Reveal from "@/components/ui/Reveal";
 import CtaLink from "@/components/ui/CtaLink";
+import MediaSlot from "@/components/ui/MediaSlot";
 import { partnerCapabilities } from "@/data/capabilities";
+import { images } from "@/data/images";
 
 /**
  * Что получает партнёр: sticky-заголовок слева, прокручиваемый
@@ -28,6 +30,9 @@ export default function PartnerSystem() {
                   <CtaLink href="#lead" variant="secondary">
                     Обсудить открытие станции
                   </CtaLink>
+                </div>
+                <div className="mt-10 hidden h-64 lg:block">
+                  <MediaSlot data={images.network} quiet />
                 </div>
               </Reveal>
             </div>
