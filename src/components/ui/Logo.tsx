@@ -3,16 +3,14 @@
 import LogoMark from "@/components/ui/LogoMark";
 
 /**
- * Логотип Kavkaz Autogas: эмблема-кольцо (LogoMark) + надписи
- * KAVKAZ / AUTOGAS фирменным шрифтом — векторная реконструкция
- * официального логотипа по предоставленному образцу.
- *
- * Если появится официальный файл (SVG/PNG из брендбука), положите его
- * в public/images/ и укажите пути ниже — он заменит реконструкцию.
+ * Логотип Kavkaz Autogas — официальный файл (public/images/logo.png).
+ * Белая версия для тёмного фона сгенерирована из официального файла
+ * (тёмные надписи перекрашены в белый, кольцо и AUTOGAS без изменений).
+ * Если пути обнулить, выводится векторная реконструкция (LogoMark + текст).
  */
 
-const LOGO_SRC: string | undefined = undefined; // "/images/logo.svg"
-const LOGO_WHITE_SRC: string | undefined = undefined; // "/images/logo-white.svg"
+const LOGO_SRC: string | undefined = "/images/logo.png";
+const LOGO_WHITE_SRC: string | undefined = "/images/logo-white.png";
 
 interface LogoProps {
   /** Инверсная версия для тёмного фона. */
@@ -28,7 +26,7 @@ export default function Logo({ inverted = false, className = "" }: LogoProps) {
       <img
         src={src}
         alt="Kavkaz Autogas"
-        className={`h-10 w-auto ${className}`}
+        className={`h-9 w-auto sm:h-10 ${className}`}
       />
     );
   }
