@@ -103,6 +103,7 @@ const materialsText = siteConfig.documents.presentation.href
 
 export default function LeadForm() {
   const [values, setValues] = useState<FormValues>(initialValues);
+  const [honeypot, setHoneypot] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -165,6 +166,7 @@ export default function LeadForm() {
       landStatus: values.landStatus as LandStatus,
       format: values.format as InterestedFormat,
       newsletterConsent: values.newsletter,
+      company: honeypot || undefined,
       page: typeof window !== "undefined" ? window.location.href : undefined,
     });
 
@@ -267,6 +269,17 @@ export default function LeadForm() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} noValidate>
+                    {/* Honeypot: невидимое поле против спам-ботов */}
+                    <input
+                      type="text"
+                      name="company"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                      className="absolute -left-[9999px] h-0 w-0 opacity-0"
+                    />
                     <div className="grid gap-6 sm:grid-cols-2">
                       <div>
                         <label htmlFor="lead-name" className={labelClass}>

@@ -1,11 +1,11 @@
 /**
  * Отправка заявок франшизы.
  *
- * TODO: Connect franchise lead form to production CRM/API endpoint.
- * Задайте NEXT_PUBLIC_LEAD_API_ENDPOINT в environment variables —
- * форма начнёт отправлять POST-запросы с JSON-телом LeadPayload.
- * При необходимости адаптируйте формат тела под вашу CRM
- * (Bitrix24, amoCRM, собственный backend) прямо в этой функции.
+ * По умолчанию заявки уходят на собственный API сайта (/api/lead),
+ * который отправляет письмо на почту компании — настройка провайдера
+ * описана в src/app/api/lead/route.ts (Web3Forms или SMTP).
+ * NEXT_PUBLIC_LEAD_API_ENDPOINT позволяет перенаправить заявки
+ * на внешний endpoint (CRM) без правки кода.
  */
 
 export type LandStatus = "yes" | "no" | "considering";
@@ -27,6 +27,8 @@ export interface LeadPayload {
   newsletterConsent?: boolean;
   /** Страница, с которой отправлена заявка. */
   page?: string;
+  /** Honeypot-поле для отсечения спам-ботов: люди его не видят и не заполняют. */
+  company?: string;
 }
 
 export interface LeadResult {
@@ -36,22 +38,10 @@ export interface LeadResult {
   error?: string;
 }
 
-const LEAD_API_ENDPOINT = process.env.NEXT_PUBLIC_LEAD_API_ENDPOINT;
+const LEAD_API_ENDPOINT =
+  process.env.NEXT_PUBLIC_LEAD_API_ENDPOINT || "/api/lead";
 
 export async function submitLead(payload: LeadPayload): Promise<LeadResult> {
-  // Endpoint не задан: реальной отправки НЕ происходит.
-  // Заявка логируется в консоль, форма показывает успешное состояние,
-  // чтобы UX-поток можно было проверить до подключения CRM.
-  if (!LEAD_API_ENDPOINT) {
-    console.warn(
-      "[leads] NEXT_PUBLIC_LEAD_API_ENDPOINT не задан — заявка НЕ отправлена на сервер (dev-режим).",
-      payload,
-    );
-    // Небольшая задержка, чтобы состояние loading было видно при проверке.
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    return { ok: true, simulated: true };
-  }
-
   try {
     const response = await fetch(LEAD_API_ENDPOINT, {
       method: "POST",
@@ -59,14 +49,19 @@ export async function submitLead(payload: LeadPayload): Promise<LeadResult> {
       body: JSON.stringify(payload),
     });
 
-    if (!response.ok) {
+    const result = (await response.json().catch(() => null)) as
+      | LeadResult
+      | null;
+
+    if (!response.ok || !result?.ok) {
       return {
         ok: false,
-        error: `Сервер вернул ошибку ${response.status}`,
+        error:
+          result?.error ?? `Сервер вернул ошибку ${response.status}`,
       };
     }
 
-    return { ok: true };
+    return result;
   } catch {
     return {
       ok: false,
