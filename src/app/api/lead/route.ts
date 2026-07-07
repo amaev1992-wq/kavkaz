@@ -135,11 +135,16 @@ export async function POST(request: Request) {
           message: text,
         }),
       });
-      const result = await response.json();
-      if (!response.ok || !result.success) {
-        console.error("[lead] Web3Forms error:", result);
+      const result = await response.json().catch(() => null);
+      if (!response.ok || !result?.success) {
+        console.error("[lead] Web3Forms error:", response.status, result);
         return NextResponse.json(
-          { ok: false, error: "Не удалось отправить заявку" },
+          {
+            ok: false,
+            error: `Не удалось отправить заявку. Ответ сервиса: ${
+              result?.message ?? `HTTP ${response.status}`
+            }`,
+          },
           { status: 502 },
         );
       }
@@ -147,7 +152,10 @@ export async function POST(request: Request) {
     } catch (error) {
       console.error("[lead] Web3Forms request failed:", error);
       return NextResponse.json(
-        { ok: false, error: "Не удалось отправить заявку" },
+        {
+          ok: false,
+          error: `Не удалось отправить заявку. Сетевая ошибка: ${String(error).slice(0, 120)}`,
+        },
         { status: 502 },
       );
     }
