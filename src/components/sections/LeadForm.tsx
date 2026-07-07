@@ -94,6 +94,11 @@ const inputClass = (hasError: boolean) =>
 const labelClass =
   "mb-2 block text-[13px] font-semibold uppercase tracking-[0.1em] text-brand-black/70";
 
+/** «презентацию и концепцию проекта» / «концепцию проекта» — по доступным файлам */
+const materialsText = siteConfig.documents.presentation.href
+  ? "презентацию и концепцию проекта"
+  : "концепцию проекта";
+
 export default function LeadForm() {
   const [values, setValues] = useState<FormValues>(initialValues);
   const [errors, setErrors] = useState<FormErrors>({});
@@ -182,9 +187,17 @@ export default function LeadForm() {
               </h2>
               <p className="mt-6 max-w-md text-[16px] leading-relaxed text-brand-black/70">
                 Расскажите, где вы планируете открыть станцию. Мы оценим
-                исходные данные, обсудим подходящий формат и свяжемся с вами.
+                исходные данные, обсудим подходящий формат и свяжемся
+                с вами — а {materialsText} вы получите сразу после
+                отправки заявки.
               </p>
               <ul className="mt-10 space-y-3 border-t border-line pt-6 text-[14px] text-brand-black/60">
+                <li className="font-semibold text-brand-black/80">
+                  — {siteConfig.documents.presentation.href
+                    ? "Презентация и концепция проекта"
+                    : "Концепция проекта"}{" "}
+                  — сразу после заявки
+                </li>
                 <li>— Оценка локации и транспортного потока</li>
                 <li>— Подбор формата под бюджет</li>
                 <li>— Предварительная модель проекта</li>
@@ -314,7 +327,7 @@ export default function LeadForm() {
                           type="email"
                           inputMode="email"
                           autoComplete="email"
-                          placeholder="Пришлём презентацию и концепцию"
+                          placeholder={`Сюда получите ${materialsText}`}
                           value={values.email}
                           onChange={(e) => setField("email", e.target.value)}
                           onFocus={markStarted}
