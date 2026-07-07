@@ -327,7 +327,7 @@ export default function LeadForm() {
                           type="email"
                           inputMode="email"
                           autoComplete="email"
-                          placeholder={`Сюда получите ${materialsText}`}
+                          placeholder="ivanov@mail.ru"
                           value={values.email}
                           onChange={(e) => setField("email", e.target.value)}
                           onFocus={markStarted}
