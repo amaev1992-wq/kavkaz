@@ -74,9 +74,9 @@ export const images: Record<
   },
 
   network: {
-    src: "/images/station-asset.jpg",
-    alt: "АЗС сети «Кавказ-Автогаз» днём",
-    placeholderLabel: "Фото: станция сети днём",
-    focal: "50% 45%",
+    src: "/images/system-station.jpg",
+    alt: "Навес станции «Кавказ-Автогаз» с фирменной подсветкой ночью",
+    placeholderLabel: "Фото: станция сети",
+    focal: "55% 35%",
   },
 };
