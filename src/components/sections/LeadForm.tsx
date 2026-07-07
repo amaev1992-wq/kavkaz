@@ -20,6 +20,7 @@ interface FormValues {
   landStatus: LandStatus | "";
   format: InterestedFormat | "";
   consent: boolean;
+  newsletter: boolean;
 }
 
 type FormErrors = Partial<Record<keyof FormValues, string>>;
@@ -32,6 +33,7 @@ const initialValues: FormValues = {
   landStatus: "",
   format: "",
   consent: false,
+  newsletter: false,
 };
 
 /** Маска российского телефона: +7 (XXX) XXX-XX-XX */
@@ -162,6 +164,7 @@ export default function LeadForm() {
       city: values.city.trim(),
       landStatus: values.landStatus as LandStatus,
       format: values.format as InterestedFormat,
+      newsletterConsent: values.newsletter,
       page: typeof window !== "undefined" ? window.location.href : undefined,
     });
 
@@ -335,9 +338,13 @@ export default function LeadForm() {
                           aria-describedby={errors.email ? "lead-email-error" : undefined}
                           className={inputClass(Boolean(errors.email))}
                         />
-                        {errors.email && (
+                        {errors.email ? (
                           <p id="lead-email-error" className="mt-1.5 text-[13px] text-brand-red">
                             {errors.email}
+                          </p>
+                        ) : (
+                          <p className="mt-1.5 text-[13px] leading-snug text-brand-gray">
+                            Получите {materialsText} сразу после отправки
                           </p>
                         )}
                       </div>
@@ -454,6 +461,20 @@ export default function LeadForm() {
                           {errors.consent}
                         </p>
                       )}
+
+                      <label className="mt-3 flex cursor-pointer items-start gap-3">
+                        <input
+                          type="checkbox"
+                          name="newsletter"
+                          checked={values.newsletter}
+                          onChange={(e) => setField("newsletter", e.target.checked)}
+                          className="mt-0.5 h-5 w-5 shrink-0 accent-brand-red"
+                        />
+                        <span className="text-[13.5px] leading-relaxed text-brand-black/70">
+                          Согласен получать новости и материалы о франшизе
+                          на email <span className="text-brand-gray">(необязательно)</span>
+                        </span>
+                      </label>
                     </div>
 
                     {submitError && (

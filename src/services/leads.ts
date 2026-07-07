@@ -23,6 +23,8 @@ export interface LeadPayload {
   city: string;
   landStatus: LandStatus;
   format: InterestedFormat;
+  /** Согласие на информационную рассылку (необязательное). */
+  newsletterConsent?: boolean;
   /** Страница, с которой отправлена заявка. */
   page?: string;
 }
