@@ -46,6 +46,28 @@ function leadToText(lead: LeadPayload): string {
     .join("\n");
 }
 
+/**
+ * Диагностика: GET /api/lead показывает, какой способ доставки настроен
+ * (сами ключи и пароли не раскрываются).
+ */
+export async function GET() {
+  const provider = process.env.WEB3FORMS_ACCESS_KEY
+    ? "web3forms"
+    : process.env.SMTP_HOST &&
+        process.env.SMTP_USER &&
+        process.env.SMTP_PASS &&
+        process.env.LEAD_EMAIL_TO
+      ? "smtp"
+      : "none";
+  return NextResponse.json({
+    provider,
+    hint:
+      provider === "none"
+        ? "Почтовая доставка не настроена: задайте WEB3FORMS_ACCESS_KEY или SMTP_* в переменных окружения и передеплойте"
+        : "Доставка настроена",
+  });
+}
+
 export async function POST(request: Request) {
   let lead: LeadPayload & { company?: string };
   try {
