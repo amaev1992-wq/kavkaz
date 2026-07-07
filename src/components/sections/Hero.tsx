@@ -80,7 +80,8 @@ export default function Hero() {
           animate="visible"
           className="max-w-[17ch] text-[clamp(1.8rem,6.2vw,4.6rem)] font-bold leading-[1.04] tracking-[-0.01em]"
         >
-          Откройте собственную АГЗС под брендом «Кавказ&#8209;Автогаз»
+          Откройте собственную АГЗС под брендом{" "}
+          <span className="whitespace-nowrap">«Кавказ-Автогаз»</span>
         </motion.h1>
 
         <motion.p
