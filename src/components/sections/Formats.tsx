@@ -52,17 +52,9 @@ export default function Formats() {
                 )}
 
                 <div className="flex flex-1 flex-col p-8 sm:p-10 lg:p-12">
-                <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-bold uppercase tracking-[0.02em]">
-                    {format.name}
-                  </h3>
-                  <span
-                    aria-hidden
-                    className={`num text-[13px] font-semibold ${dark ? "text-white/40" : "text-brand-gray"}`}
-                  >
-                    {format.id === "standard" ? "F–01" : "F–02"}
-                  </span>
-                </div>
+                <h3 className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-bold uppercase tracking-[0.02em]">
+                  {format.name}
+                </h3>
                 <p className={`mt-2 text-[15px] ${dark ? "text-white/65" : "text-brand-gray"}`}>
                   {format.tagline}
                 </p>
