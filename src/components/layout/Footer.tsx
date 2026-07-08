@@ -49,16 +49,12 @@ export default function Footer() {
               Основной сайт компании ↗
             </a>
             <a
-              href={siteConfig.legal.privacyPolicyUrl}
+              href={siteConfig.legal.personalDataPolicyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex min-h-[32px] items-center text-white/70 transition-colors hover:text-white"
             >
-              Политика конфиденциальности
-            </a>
-            <a
-              href={siteConfig.legal.personalDataConsentUrl}
-              className="inline-flex min-h-[32px] items-center text-white/70 transition-colors hover:text-white"
-            >
-              Согласие на обработку персональных данных
+              Политика обработки персональных данных
             </a>
           </div>
         </div>

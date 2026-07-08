@@ -466,7 +466,15 @@ export default function LeadForm() {
                           className="mt-0.5 h-5 w-5 shrink-0 accent-brand-red"
                         />
                         <span className="text-[13.5px] leading-relaxed text-brand-black/70">
-                          Я согласен на обработку персональных данных
+                          Я согласен на{" "}
+                          <a
+                            href={siteConfig.legal.personalDataPolicyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline underline-offset-2 transition-colors hover:text-brand-red"
+                          >
+                            обработку персональных данных
+                          </a>
                         </span>
                       </label>
                       {errors.consent && (
