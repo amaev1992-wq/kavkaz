@@ -49,7 +49,8 @@ const LEAD_API_ENDPOINT =
  * Замена ключа: env NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY приоритетнее константы.
  */
 const WEB3FORMS_PUBLIC_KEY =
-  process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "";
+  process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ||
+  "80a93c34-6c1d-4889-81ef-929579fc3803";
 
 const landLabels: Record<string, string> = {
   yes: "Да",
