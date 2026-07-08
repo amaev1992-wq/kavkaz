@@ -41,7 +41,82 @@ export interface LeadResult {
 const LEAD_API_ENDPOINT =
   process.env.NEXT_PUBLIC_LEAD_API_ENDPOINT || "/api/lead";
 
+/**
+ * Ключ Web3Forms — ПУБЛИЧНЫЙ по дизайну сервиса (он виден в коде страницы,
+ * это штатный режим работы web3forms.com). Заявка при этом отправляется
+ * из браузера посетителя напрямую в Web3Forms: серверные запросы к их API
+ * блокируются антибот-защитой (403).
+ * Замена ключа: env NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY приоритетнее константы.
+ */
+const WEB3FORMS_PUBLIC_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "";
+
+const landLabels: Record<string, string> = {
+  yes: "Да",
+  no: "Нет",
+  considering: "Рассматривает варианты",
+};
+
+const formatLabels: Record<string, string> = {
+  standard: "Стандарт",
+  premium: "Премиум",
+  rebranding: "Ребрендинг",
+  undecided: "Не определился",
+};
+
+async function submitViaWeb3Forms(
+  payload: LeadPayload,
+): Promise<LeadResult> {
+  try {
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_PUBLIC_KEY,
+        subject: `Заявка с сайта франшизы: ${payload.name}, ${payload.city}`,
+        from_name: "Сайт франшизы Кавказ-Автогаз",
+        // Reply-To — почта заявителя, чтобы отвечать в один клик
+        email: payload.email,
+        name: payload.name,
+        message: [
+          `Имя: ${payload.name}`,
+          `Телефон: ${payload.phone}`,
+          `Email: ${payload.email}`,
+          `Город / регион: ${payload.city}`,
+          `Земельный участок: ${landLabels[payload.landStatus] ?? payload.landStatus}`,
+          `Интересующий формат: ${formatLabels[payload.format] ?? payload.format}`,
+          `Согласие на рассылку: ${payload.newsletterConsent ? "да" : "нет"}`,
+          payload.page ? `Страница: ${payload.page}` : null,
+        ]
+          .filter(Boolean)
+          .join("\n"),
+        // honeypot Web3Forms
+        botcheck: payload.company || undefined,
+      }),
+    });
+    const result = await response.json().catch(() => null);
+    if (!response.ok || !result?.success) {
+      return {
+        ok: false,
+        error: `Не удалось отправить заявку${result?.message ? `: ${result.message}` : ""}`,
+      };
+    }
+    return { ok: true };
+  } catch {
+    return {
+      ok: false,
+      error: "Не удалось отправить заявку. Проверьте соединение.",
+    };
+  }
+}
+
 export async function submitLead(payload: LeadPayload): Promise<LeadResult> {
+  // Основной путь: напрямую из браузера в Web3Forms (если ключ задан
+  // и не настроен внешний endpoint CRM).
+  if (WEB3FORMS_PUBLIC_KEY && !process.env.NEXT_PUBLIC_LEAD_API_ENDPOINT) {
+    return submitViaWeb3Forms(payload);
+  }
+
   try {
     const response = await fetch(LEAD_API_ENDPOINT, {
       method: "POST",
