@@ -21,7 +21,7 @@ export default function FuelQuality() {
             </h2>
           </Reveal>
           <Reveal delay={0.1} className="lg:col-span-6 lg:col-start-7 lg:self-end">
-            <p className="max-w-lg text-[16px] leading-relaxed text-brand-black/70">
+            <p className="max-w-lg text-[16px] font-medium leading-relaxed text-brand-black/80">
               К реализации допускается проверенное топливо от надёжных
               поставщиков. Каждая партия сопровождается необходимыми
               документами, подтверждающими качество продукта.

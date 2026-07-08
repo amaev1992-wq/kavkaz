@@ -18,7 +18,7 @@ export default function CompanyStats() {
             </h2>
           </Reveal>
           <Reveal delay={0.1} className="lg:col-span-6 lg:col-start-7 lg:self-end">
-            <p className="max-w-lg text-[16px] leading-relaxed text-brand-black/70">
+            <p className="max-w-lg text-[16px] font-medium leading-relaxed text-brand-black/80">
               Мы развиваем топливный бизнес с 2006 года — от оптовых поставок
               и логистики до собственной розничной сети АГЗС и АЗС.
             </p>
@@ -32,7 +32,7 @@ export default function CompanyStats() {
               delay={0.05 * index}
               className="flex flex-col border-b border-line py-9 pr-6 sm:[&:nth-child(odd)]:pr-10 lg:py-12"
             >
-              <dt className="order-2 mt-3 block max-w-[26ch] text-[14px] leading-snug text-brand-gray">
+              <dt className="order-2 mt-3 block max-w-[26ch] text-[14px] font-medium leading-snug text-brand-black/65">
                 {stat.label}
               </dt>
               <dd className="num order-1 text-[clamp(2.6rem,5vw,4.2rem)] font-bold leading-none tracking-[-0.02em] text-brand-black">

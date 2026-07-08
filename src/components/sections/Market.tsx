@@ -37,7 +37,7 @@ export default function Market() {
                   className="flex gap-4 border-t border-line py-5 first:border-t-0"
                 >
                   <span aria-hidden className="mt-[0.55em] block h-px w-6 shrink-0 bg-brand-red" />
-                  <p className="text-[15.5px] leading-relaxed text-brand-black/75">
+                  <p className="text-[15.5px] font-medium leading-relaxed text-brand-black/85">
                     {point}
                   </p>
                 </Reveal>
@@ -67,7 +67,7 @@ export default function Market() {
                   </div>
                 </div>
               </div>
-              <p className="mt-10 border-t border-line pt-6 text-[14px] leading-relaxed text-brand-black/65">
+              <p className="mt-10 border-t border-line pt-6 text-[14px] font-medium leading-relaxed text-brand-black/75">
                 При существенной разнице в стоимости топлива использование СУГ
                 становится экономически привлекательным для автомобилиста.
                 Конкретная экономия зависит от региона и рассчитывается

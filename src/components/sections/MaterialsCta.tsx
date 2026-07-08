@@ -22,7 +22,7 @@ export default function MaterialsCta() {
               <h2 className="mt-3 text-[clamp(1.4rem,2.6vw,2.1rem)] font-bold leading-[1.15]">
                 Хотите изучить проект подробнее?
               </h2>
-              <p className="mt-3 text-[15.5px] leading-relaxed text-white/70">
+              <p className="mt-3 text-[15.5px] font-medium leading-relaxed text-white/80">
                 Оставьте заявку — вы получите{" "}
                 {siteConfig.documents.presentation.href
                   ? "презентацию франшизы и концепцию проекта"

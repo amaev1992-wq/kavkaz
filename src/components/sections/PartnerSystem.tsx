@@ -21,7 +21,7 @@ export default function PartnerSystem() {
                 <h2 className="mt-5 max-w-[14ch] text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.08] tracking-[-0.01em]">
                   Вы открываете станцию. Мы передаём систему.
                 </h2>
-                <p className="mt-6 max-w-md text-[16px] leading-relaxed text-brand-black/70">
+                <p className="mt-6 max-w-md text-[16px] font-medium leading-relaxed text-brand-black/80">
                   Франчайзи работает под брендом «Кавказ-Автогаз» и получает
                   систему, которую мы используем на собственных объектах:
                   стандарты сети, регламенты и операционную модель —
@@ -59,7 +59,7 @@ export default function PartnerSystem() {
                     <h3 className="text-[17px] font-bold uppercase tracking-[0.04em] sm:text-[19px]">
                       {capability.title}
                     </h3>
-                    <p className="mt-2 max-w-xl text-[14.5px] leading-relaxed text-brand-black/70">
+                    <p className="mt-2 max-w-xl text-[14.5px] font-medium leading-relaxed text-brand-black/80">
                       {capability.description}
                     </p>
                   </div>

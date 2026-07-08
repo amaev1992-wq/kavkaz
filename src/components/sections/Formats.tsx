@@ -19,7 +19,7 @@ export default function Formats() {
           <h2 className="mt-5 text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.08] tracking-[-0.01em]">
             Выберите формат под вашу локацию и инвестиционный бюджет
           </h2>
-          <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-brand-black/70">
+          <p className="mt-5 max-w-xl text-[16px] font-medium leading-relaxed text-brand-black/80">
             Два основных формата франшизы — «Стандарт» и «Премиум». Для
             действующих станций работает отдельная модель ребрендинга.
           </p>
@@ -87,7 +87,7 @@ export default function Formats() {
                   {format.features.map((feature) => (
                     <li key={feature} className="flex gap-3">
                       <span aria-hidden className="mt-[0.6em] block h-px w-4 shrink-0 bg-brand-red" />
-                      <span className={`text-[14.5px] leading-relaxed ${dark ? "text-white/80" : "text-brand-black/75"}`}>
+                      <span className={`text-[14.5px] leading-relaxed ${dark ? "text-white/85" : "text-brand-black/85"}`}>
                         {feature}
                       </span>
                     </li>
@@ -98,7 +98,7 @@ export default function Formats() {
                   <p className={`text-[12px] font-semibold uppercase tracking-[0.14em] ${dark ? "text-white/50" : "text-brand-gray"}`}>
                     Подходит для
                   </p>
-                  <p className={`mt-2 text-[14.5px] leading-relaxed ${dark ? "text-white/80" : "text-brand-black/75"}`}>
+                  <p className={`mt-2 text-[14.5px] leading-relaxed ${dark ? "text-white/85" : "text-brand-black/85"}`}>
                     {format.suitableFor.join(" · ")}
                   </p>
                 </div>
@@ -131,7 +131,7 @@ export default function Formats() {
                 <h3 className="mt-3 text-[clamp(1.4rem,2.4vw,2rem)] font-bold leading-[1.15]">
                   {rebrandingFormat.headline}
                 </h3>
-                <p className="mt-3 max-w-2xl text-[15.5px] leading-relaxed text-brand-black/70">
+                <p className="mt-3 max-w-2xl text-[15.5px] font-medium leading-relaxed text-brand-black/80">
                   {rebrandingFormat.description}
                 </p>
                 <p className="mt-3 text-[14px] text-brand-gray">

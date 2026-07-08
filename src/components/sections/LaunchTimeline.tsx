@@ -63,7 +63,7 @@ export default function LaunchTimeline() {
                     {step.title}
                   </h3>
                   <p
-                    className={`mt-2 max-w-md text-[14.5px] leading-relaxed text-brand-black/70 ${
+                    className={`mt-2 max-w-md text-[14.5px] font-medium leading-relaxed text-brand-black/80 ${
                       isEven ? "" : "lg:ml-auto"
                     }`}
                   >

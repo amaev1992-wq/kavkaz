@@ -190,13 +190,13 @@ export default function LeadForm() {
               <h2 className="mt-5 max-w-[15ch] text-[clamp(1.9rem,4vw,3.2rem)] font-bold leading-[1.08] tracking-[-0.01em]">
                 Рассчитаем проект под вашу локацию
               </h2>
-              <p className="mt-6 max-w-md text-[16px] leading-relaxed text-brand-black/70">
+              <p className="mt-6 max-w-md text-[16px] font-medium leading-relaxed text-brand-black/80">
                 Расскажите, где вы планируете открыть станцию. Мы оценим
                 исходные данные, обсудим подходящий формат и свяжемся
                 с вами — а {materialsText} вы получите сразу после
                 отправки заявки.
               </p>
-              <ul className="mt-10 space-y-3 border-t border-line pt-6 text-[14px] text-brand-black/60">
+              <ul className="mt-10 space-y-3 border-t border-line pt-6 text-[14px] font-medium text-brand-black/70">
                 <li className="font-semibold text-brand-black/80">
                   — {siteConfig.documents.presentation.href
                     ? "Презентация и концепция проекта"
@@ -223,7 +223,7 @@ export default function LeadForm() {
                     <h3 className="mt-6 text-[clamp(1.4rem,2.4vw,2rem)] font-bold leading-tight">
                       Спасибо. Заявка получена.
                     </h3>
-                    <p className="mt-4 max-w-md text-[16px] leading-relaxed text-brand-black/70">
+                    <p className="mt-4 max-w-md text-[16px] font-medium leading-relaxed text-brand-black/80">
                       Мы свяжемся с вами для обсуждения проекта. А материалы
                       о франшизе можно изучить уже сейчас:
                     </p>
@@ -465,7 +465,7 @@ export default function LeadForm() {
                           aria-describedby={errors.consent ? "lead-consent-error" : undefined}
                           className="mt-0.5 h-5 w-5 shrink-0 accent-brand-red"
                         />
-                        <span className="text-[13.5px] leading-relaxed text-brand-black/70">
+                        <span className="text-[13.5px] leading-relaxed text-brand-black/80">
                           Я согласен на{" "}
                           <a
                             href={siteConfig.legal.personalDataPolicyUrl}
@@ -491,7 +491,7 @@ export default function LeadForm() {
                           onChange={(e) => setField("newsletter", e.target.checked)}
                           className="mt-0.5 h-5 w-5 shrink-0 accent-brand-red"
                         />
-                        <span className="text-[13.5px] leading-relaxed text-brand-black/70">
+                        <span className="text-[13.5px] leading-relaxed text-brand-black/80">
                           Согласен получать новости и материалы о франшизе
                           на email <span className="text-brand-gray">(необязательно)</span>
                         </span>

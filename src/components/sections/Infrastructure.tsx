@@ -19,7 +19,7 @@ export default function Infrastructure() {
             </h2>
           </Reveal>
           <Reveal delay={0.1} className="lg:col-span-5 lg:col-start-8 lg:self-end">
-            <p className="max-w-lg text-[16px] leading-relaxed text-white/70">
+            <p className="max-w-lg text-[16px] font-medium leading-relaxed text-white/80">
               «Кавказ-Автогаз» работает одновременно в оптовом сегменте,
               логистике и розничной эксплуатации станций. Этот опыт лежит
               в основе франчайзинговой модели.

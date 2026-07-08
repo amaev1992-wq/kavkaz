@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Logo from "@/components/ui/Logo";
 import { trackEvent } from "@/lib/analytics";
+import { siteConfig } from "@/config/site";
 
 const navItems = [
   { href: "#about", label: "О франшизе" },
@@ -64,6 +65,16 @@ export default function Header() {
                 </a>
               </li>
             ))}
+            <li>
+              <a
+                href={siteConfig.mainSiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[44px] items-center gap-1 text-[14px] font-medium text-brand-black/70 transition-colors hover:text-brand-red"
+              >
+                Основной сайт <span aria-hidden className="text-[12px]">↗</span>
+              </a>
+            </li>
           </ul>
         </nav>
 
@@ -115,7 +126,7 @@ export default function Header() {
         <nav aria-label="Разделы страницы" className="container-page py-4">
           <ul className="flex flex-col">
             {navItems.map((item) => (
-              <li key={item.href} className="border-b border-line last:border-b-0">
+              <li key={item.href} className="border-b border-line">
                 <a
                   href={item.href}
                   onClick={closeMenu}
@@ -125,6 +136,17 @@ export default function Header() {
                 </a>
               </li>
             ))}
+            <li>
+              <a
+                href={siteConfig.mainSiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+                className="flex min-h-[52px] items-center gap-1.5 text-[16px] font-medium text-brand-black transition-colors hover:text-brand-red"
+              >
+                Основной сайт <span aria-hidden className="text-[13px]">↗</span>
+              </a>
+            </li>
           </ul>
           <a
             href="#lead"
