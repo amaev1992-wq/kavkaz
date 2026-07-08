@@ -30,10 +30,10 @@ export const images: Record<
   MediaSlotData
 > = {
   hero: {
-    src: "/images/hero-station-night.jpg",
-    alt: "Станция сети «Кавказ-Автогаз» ночью: подсвеченный навес с фирменным логотипом и минимаркет",
+    src: "/images/hero-station-night-2.jpg",
+    alt: "Станция сети «Кавказ-Автогаз» ночью: подсвеченный навес и минимаркет с кафе",
     placeholderLabel: "Фото: станция «Кавказ-Автогаз», вечер",
-    focal: "50% 42%",
+    focal: "38% 45%",
   },
 
   infrastructure: {
