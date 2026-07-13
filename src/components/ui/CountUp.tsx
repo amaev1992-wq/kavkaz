@@ -4,8 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { useInView, useReducedMotion } from "framer-motion";
 
 /**
- * Сдержанный count-up: число «догоняет» значение при появлении во viewport.
- * При prefers-reduced-motion сразу показывается финальное значение.
+ * Сдержанный count-up. Принцип progressive enhancement:
+ * в разметке сразу стоит ФИНАЛЬНОЕ значение (SEO + гарантия корректного
+ * отображения в любых браузерах и WebView), а анимация «пробега» от нуля
+ * запускается поверх, только когда блок реально попал во viewport.
+ * Если IntersectionObserver не сработал или включён prefers-reduced-motion —
+ * посетитель просто видит правильное число.
  */
 interface CountUpProps {
   value: number;
@@ -17,7 +21,7 @@ interface CountUpProps {
 
 function formatNumber(n: number, formatted: boolean): string {
   if (!formatted) return String(n);
-  return new Intl.NumberFormat("ru-RU").format(n).replace(/ /g, " ");
+  return new Intl.NumberFormat("ru-RU").format(n).replace(/ /g, " ");
 }
 
 export default function CountUp({
@@ -29,14 +33,14 @@ export default function CountUp({
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const reduceMotion = useReducedMotion();
-  const [display, setDisplay] = useState(reduceMotion ? value : 0);
+  // Стартуем с финального значения — «0» не показывается никогда,
+  // кроме момента самой анимации.
+  const [display, setDisplay] = useState(value);
+  const animatedRef = useRef(false);
 
   useEffect(() => {
-    if (!inView) return;
-    if (reduceMotion) {
-      setDisplay(value);
-      return;
-    }
+    if (!inView || reduceMotion || animatedRef.current) return;
+    animatedRef.current = true;
 
     let frame: number;
     const start = performance.now();
